@@ -12,7 +12,7 @@ var CronJob = require('cron').CronJob;
 var JsonDB = require('node-json-db');
 var db = new JsonDB("./trafficdb", true, true);
 
-server.listen(8080, function listening(){
+server.listen(8081, function listening(){
     console.log('Listening on %d', server.address().port);
 });
 app.get('/get-data', function(req, res){
