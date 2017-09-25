@@ -20,7 +20,7 @@ fetch('/get-data', opts).then(function(response) {
             zoomType: 'xy'
         },
         title: {
-            text: 'This is a test.'
+            text: 'Traffic Over Time to Work'
         },
         xAxis: {
             type: 'datetime',
@@ -66,8 +66,9 @@ fetch('/get-data', opts).then(function(response) {
                     }
                 },
                 tooltip: {
+                    // xDateFormat: '%H:%M',
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x} cm, {point.y} kg'
+                    pointFormat: '{point.x:%H:%M}, {point.y} min'
                 }
             }
         },
