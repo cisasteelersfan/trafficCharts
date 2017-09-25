@@ -10,7 +10,8 @@ app.use(express.static(path.join(__dirname, './')));
 const server = require('http').createServer(app);
 var CronJob = require('cron').CronJob;
 var JsonDB = require('node-json-db');
-var db = new JsonDB("./trafficdb", true, true);
+// second argument is save after each push, third is save in human readable
+var db = new JsonDB("./trafficdb", true, false);
 
 server.listen(8081, function listening(){
     console.log('Listening on %d', server.address().port);

@@ -8,6 +8,12 @@ fetch('/get-data', opts).then(function(response) {
 .then(function(body) {
     console.log(body);
 
+    Highcharts.setOptions({
+        global: {
+            timezoneOffset: (new Date()).getTimezoneOffset()
+        }
+    })
+
     Highcharts.chart('container', {
         chart: {
             type: 'scatter',
