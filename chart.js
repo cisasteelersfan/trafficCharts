@@ -29,12 +29,12 @@ fetch('/get-data', opts).then(function(response) {
             	hour: '%H:%M'
             },
             title: {
-                text: 'Time of day'
+                text: 'Time of Day'
             },
         },
         yAxis: {
             title: {
-                text: 'Duration In Traffic'
+                text: 'Minutes In Traffic'
             }
         },
         legend: {
@@ -42,7 +42,7 @@ fetch('/get-data', opts).then(function(response) {
             align: 'left',
             verticalAlign: 'top',
             x: 100,
-            y: 70,
+            y: 10,
             floating: true,
             backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
             borderWidth: 1
@@ -74,12 +74,12 @@ fetch('/get-data', opts).then(function(response) {
         },
         series: [{
             name: 'Dodge',
-            color: 'rgba(223, 83, 83, .5)',
+            color: 'rgba(9, 112, 84, .5)',
             data: body[0]
         },
         {
             name: 'I680',
-            color: 'rgba(0, 255, 255, .5)',
+            color: 'rgba(255, 153, 0, .5)',
             data: body[1]
         }]
 });
