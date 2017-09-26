@@ -17,11 +17,21 @@ server.listen(8081, function listening(){
     console.log('Listening on %d', server.address().port);
 });
 app.get('/get-data', function(req, res){
-    res.send([db.getData("/traffic/dodge/0"), db.getData("/traffic/six80/0")]);
+    var data = {dodge: [], six80: []};
+    for(var i = 0; i<7; i++){
+        try{
+            data.dodge.push(db.getData("/traffic/dodge/"+String(i)));
+        } catch(err){}
+        try{
+            data.six80.push(db.getData("/traffic/six80/"+String(i)));
+        } catch(err){}
+    }
+    res.send(data);
+    // res.send([db.getData("/traffic/dodge/1"), db.getData("/traffic/six80/1")]);
     // res.send(JSON.parse('{"data": "HEY IT WORKS OMG"}'));
 });
 
-new CronJob(' * * * * *', function(){
+new CronJob('* * * * *', function(){
     var now = new Date();
     updateData(six80wp, 'six80', now);
     updateData(dodgewp, 'dodge', now);

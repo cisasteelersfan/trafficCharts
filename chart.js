@@ -7,10 +7,27 @@ fetch('/get-data', opts).then(function(response) {
 })
 .then(function(body) {
     console.log(body);
+    var dodgeData = [];
+    for(var i=0; i<body.dodge.length; i++){
+        dodgeData = dodgeData.concat(body.dodge[i]);
+    }
+    var six80Data = [];
+    for(var i=0; i<body.six80.length; i++){
+        six80Data = six80Data.concat(body.six80[i]);
+    }
+    var millisOffset = (new Date()).getTimezoneOffset() * 1000 * 60;
+    for(var i=0; i<dodgeData.length; i++){
+        dodgeData[i][0] -= millisOffset;
+        six80Data[i][0] -= millisOffset;
+        dodgeData[i][0] %= 86400000;
+        six80Data[i][0] %= 86400000;
+    }
+    console.log("dodgeData:");
+    console.log(dodgeData);
 
     Highcharts.setOptions({
         global: {
-            timezoneOffset: (new Date()).getTimezoneOffset()
+            // timezoneOffset: (new Date()).getTimezoneOffset()
         }
     })
 
@@ -25,6 +42,7 @@ fetch('/get-data', opts).then(function(response) {
         xAxis: {
             type: 'datetime',
             dateTimeLabelFormats: {
+                day: '%H:%M',
                 minute: '%H:%M',
             	hour: '%H:%M'
             },
@@ -75,12 +93,12 @@ fetch('/get-data', opts).then(function(response) {
         series: [{
             name: 'Dodge',
             color: 'rgba(9, 112, 84, .5)',
-            data: body[0]
+            data: dodgeData
         },
         {
             name: 'I680',
             color: 'rgba(255, 153, 0, .5)',
-            data: body[1]
+            data: six80Data
         }]
-});
+    });
 });
