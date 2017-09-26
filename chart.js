@@ -18,8 +18,10 @@ fetch('/get-data', opts).then(function(response) {
     var millisOffset = (new Date()).getTimezoneOffset() * 1000 * 60;
     for(var i=0; i<dodgeData.length; i++){
         dodgeData[i][0] -= millisOffset;
-        six80Data[i][0] -= millisOffset;
         dodgeData[i][0] %= 86400000;
+    }
+    for(var i=0; i<six80Data.length; i++){
+        six80Data[i][0] -= millisOffset;
         six80Data[i][0] %= 86400000;
     }
     console.log("dodgeData:");
